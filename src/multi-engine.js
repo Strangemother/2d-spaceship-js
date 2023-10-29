@@ -1,19 +1,6 @@
-const run = function() {
-    const shipElement = document.getElementById('ship');
-    window.ship = new Ship(shipElement);
 
-    const engine1 = new Engine(0.00, 0, { x: 50, y: 50 }); // Engine on the right side, pushing to the right
-    const engine2 = new Engine(0.00, 0, { x: 50, y: -50 }); // Engine on the left side, pushing to the left
-    const engine3 = new Engine(0.00, 0, { x: -50, y: -50 }); // Engine on the left side, pushing to the left
-    const engine4 = new Engine(0.00, 0, { x: -50, y: 50 }); // Engine on the left side, pushing to the left
-
-    ship.addEngine(engine1);
-    ship.addEngine(engine2);
-    ship.addEngine(engine3);
-    ship.addEngine(engine4);
-
-    // ... (rest of the code)
-}
+// Populated by the chosen ship, such as a MotionShip
+var Ship;
 
 class Engine {
     constructor(power, direction, position) {
@@ -100,8 +87,19 @@ class Engines {
     }
 }
 
+const gridWrap = function(x, y) {
 
-class Ship extends Engines {
+    // Wrap around logic
+    const spaceSize = 600; // Assuming space is 500x500
+    if (x > spaceSize) x = 0;
+    if (x < 0) x = spaceSize;
+    if (y > spaceSize) y = 0;
+    if (y < 0) y = spaceSize;
+
+    return [x,y]
+}
+
+class MotionShip extends Engines {
     constructor(element) {
         super()
         this.element = element;
@@ -135,18 +133,12 @@ class Ship extends Engines {
         // this.velocityX += Math.sin( rot * ( Math.PI / 180 ) ) * speed;
         // this.velocityY -= Math.cos( rot * ( Math.PI / 180 ) ) * speed;
 
-        let x = this.x + this.velocityX;
-        let y = this.y + this.velocityY;
-
-        // Wrap around logic
-        const spaceSize = 600; // Assuming space is 500x500
-        if (x > spaceSize) x = 0;
-        if (x < 0) x = spaceSize;
-        if (y > spaceSize) y = 0;
-        if (y < 0) y = spaceSize;
-
-        this.x = x
-        this.y = y
+        let xy = gridWrap(
+            this.x + this.velocityX,
+            this.y + this.velocityY
+        )
+        this.x = xy[0]
+        this.y = xy[1]
         // this.setEngineDegrees(isNaN(rot)?0:rot)
     }
 
@@ -219,6 +211,7 @@ class Ship extends Engines {
 
 }
 
+Ship = MotionShip
 
 document.addEventListener('keydown', (e) => {
     let rt = .05;
@@ -252,4 +245,3 @@ document.addEventListener('keyup', (e) => {
     }
 });
 
-;run();

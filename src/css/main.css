@@ -28,3 +28,10 @@ html, body {
     background: darkgreen;
     height: 22%;
 }
+
+.bullet {
+    position: absolute;
+    background: red;
+    width: 3px;
+    height: 12px;
+}
