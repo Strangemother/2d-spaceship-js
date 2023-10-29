@@ -6,9 +6,9 @@ class Bullet {
         this.y = y;
         this.direction = direction;
         this.velocity = 5; // Adjust as needed
+        this.element = el
         console.log('Bullet', x,y)
         this.t = undefined
-        this.element = el
     }
 
     updatePosition(t) {
@@ -20,6 +20,7 @@ class Bullet {
         if(t - this.t > 200) {
             this.kill()
         }
+
         let vhp = this.direction * (Math.PI / 180)
         let x = this.x + Math.sin(vhp) * this.velocity;
         let y = this.y - Math.cos(vhp) * this.velocity;
@@ -41,7 +42,7 @@ class Bullet {
     animateDiv() {
         this.element.style.left = `${parseInt(this.x)}px`;
         this.element.style.top = `${parseInt(this.y)}px`;
-        // this.element.style.transform = `rotate(${this.rotationAngle}deg)`;
+        this.element.style.transform = `rotate(${this.direction}deg)`;
     }
 
     kill(){
@@ -64,12 +65,12 @@ class BulletBox {
         console.log('Bullet removal count:', bc - ba)
     }
 
-    create(x,y,r) {
+    create(x,y, direction) {
         let el = document.createElement('div')
         el.classList.add('bullet')
         document.body.appendChild(el)
 
-        const bullet = new Bullet(x,y,r, el);
+        const bullet = new Bullet(x,y, direction, el);
         this.bullets.push(bullet);
         return bullet
     }
