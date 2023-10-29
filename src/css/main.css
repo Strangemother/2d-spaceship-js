@@ -12,13 +12,15 @@ html, body {
 }
 
 #ship {
-    width: 6px;
-    height: 20px;
+    width: 100px;
+    height: 100px;
     background-color: green;
     position: absolute;
     top: 50%;
     left: 50%;
+    justify-content: center;
     transform-origin: center;
+    display: flex;
 }
 
 .info {
@@ -33,5 +35,18 @@ html, body {
     position: absolute;
     background: red;
     width: 3px;
-    height: 12px;
+    height: 3px;
+}
+
+.center-dot {
+    background: black;
+    /* position: absolute; */
+    display: block;
+    width: 3px;
+    height: 3px;
+    transform-origin: center;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
 }
