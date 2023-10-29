@@ -1,0 +1,30 @@
+html, body {
+    color: #999;
+    background: #010101;
+}
+
+#space {
+    width: 600px;
+    height: 600px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+#ship {
+    width: 6px;
+    height: 20px;
+    background-color: green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.info {
+}
+
+#ship .head {
+    background: darkgreen;
+    height: 22%;
+}
